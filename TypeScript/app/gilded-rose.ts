@@ -19,9 +19,13 @@ export class GildedRose {
   constructor(items = [] as Array<Item>) {
     this.items = items;
   }
+  private increaseQuality(item: Item): void {
+      item.quality = item.quality + 1;
+  } 
 
-
-
+  private decreaseQuality(item: Item): void {
+    item.quality = item.quality - 1;
+  }
   updateQuality(): Item[] {
     for (let i = 0; i < this.items.length; i++) {
       const item = this.items[i];
@@ -31,21 +35,21 @@ export class GildedRose {
       ) {
         if (item.quality > 0) {
           if (item.name !== SULFURAS) {
-            item.quality = item.quality - 1
+            this.decreaseQuality(item)
           }
         }
       } else {
         if (item.quality < 50) {
-          item.quality = item.quality + 1
+          this.increaseQuality(item)
           if (item.name === BACKSTAGE_PASS) {
             if (item.sellIn < 11) {
               if (item.quality < 50) {
-                item.quality = item.quality + 1
+                this.increaseQuality(item)
               }
             }
             if (item.sellIn < 6) {
               if (item.quality < 50) {
-                item.quality = item.quality + 1
+                this.increaseQuality(item)
               }
             }
           }
@@ -59,7 +63,7 @@ export class GildedRose {
           if (item.name !== BACKSTAGE_PASS) {
             if (item.quality > 0) {
               if (item.name !== SULFURAS) {
-                item.quality = item.quality - 1
+                this.decreaseQuality(item)
               }
             }
           } else {
@@ -67,7 +71,7 @@ export class GildedRose {
           }
         } else {
           if (item.quality < 50) {
-            item.quality = item.quality + 1
+            this.increaseQuality(item)
           }
         }
       }
