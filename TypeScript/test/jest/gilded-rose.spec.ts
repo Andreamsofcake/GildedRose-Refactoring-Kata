@@ -59,6 +59,7 @@ describe('Gilded Rose Approval', () => {
     const items = gildedRose.updateQuality();
     expect(items[0].quality).toBe(0);
   });
+  
   it('updates a normal item', () => {
     const gildedRose = new GildedRose([
       new Item('foo', 5, 10),
@@ -68,6 +69,7 @@ describe('Gilded Rose Approval', () => {
       new Item('foo', 4, 9)
     );
   });
+
   it('returns an array of Items', () => {
     const gildedRose = new GildedRose([
       new Item('foo', 5, 10),
@@ -77,6 +79,26 @@ describe('Gilded Rose Approval', () => {
 
     expect(items[0]).toBeInstanceOf(Item);
   });
+
+  it('decreases quality by 1 for normal item', () => {
+    const gildedRose = new GildedRose([
+      new Item('foo', 5, 10),
+    ]);
+
+    const items = gildedRose.updateQuality();
+
+    expect(items[0].quality).toBe(9);
+  });
+
+  it('decreases quality by 1 for normal item', () => {
+  const gildedRose = new GildedRose([
+    new Item('foo', 5, 10),
+  ]);
+
+  const items = gildedRose.updateQuality();
+
+  expect(items[0].quality).toBe(9);
+});
 
   it('should thirtyDays', () => {
     setGoldenMasterArgv(30);
