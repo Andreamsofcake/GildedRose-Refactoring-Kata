@@ -48,6 +48,11 @@ describe('Gilded Rose Approval', () => {
     console.log = originalConsoleLog;
     process.argv = originalProcessArgv;
   });
+  it('creates with empty items by default', () => {
+    const gildedRose = new GildedRose();
+
+    expect(gildedRose.items).toEqual([]);
+  });
 
   it('quality never goes below 0', () => {
     const gildedRose = new GildedRose([new Item('foo', 10, 0)]);
