@@ -37,12 +37,20 @@ describe('Gilded Rose Approval', () => {
     process.argv = originalProcessArgv;
   });
 
-  it('should foo', () => {
-    const gildedRose = new GildedRose([new Item('foo', 0, 0)]);
+  it('should update quality by one when sellIn is positive', () => {
+    const gildedRose = new GildedRose([new Item('foo', 5, 10)]);
     const items = gildedRose.updateQuality();
   
-    expect(items).toMatchSnapshot();
+    expect(items[0].quality).toBe(9);
+    expect(items[0].sellIn).toBe(4);
   });
+
+  it('quality never goes below 0', () => {
+  const gildedRose = new GildedRose([new Item('foo', 10, 0)]);
+  const items = gildedRose.updateQuality();
+
+  expect(items[0].quality).toBe(0);
+});
 
   it('should thirtyDays', () => {
     process.argv = ["<node>", "<script", "30"];
